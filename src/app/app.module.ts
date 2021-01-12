@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsComponent } from './components/forms-component/forms-component.component'; 
 import { MatStepperModule } from '@angular/material/stepper'; 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card'; 
 
 
 
@@ -30,7 +31,8 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     MatInputModule,
     MatStepperModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   exports:[
     MatButtonModule,
