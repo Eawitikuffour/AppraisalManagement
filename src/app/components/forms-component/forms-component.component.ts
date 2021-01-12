@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,FormControl, FormGroup,FormArray, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-forms-component',
@@ -11,17 +12,55 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
   }]
 })
 export class FormsComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  personalInformation: FormGroup;
+  public performancePlanning: FormGroup;
+  public keyAreaFormArray: FormArray;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder) { 
+    this.performancePlanning = this._formBuilder.group({
+      keyAreaFormArray: this._formBuilder.array([this.createPerformancePlanning()])
 
-  ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
     });
   }
+
+  ngOnInit() {
+
+   // this.keyAreaFormArray = this._formBuilder.array([]);
+
+    //this.addKeyResearchArea();
+
+    this.personalInformation = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+
+
+    
+  }
+
+  
+
+  get keyResultControl() {
+    return this.performancePlanning.get('keyAreaFormArray')['controls'];
+  }
+
+
+  createPerformancePlanning(): FormGroup{
+    return this._formBuilder.group({
+      keyResultsArea: '',
+      targets: '',
+      resourcesRequired: ''
+    });
+  }
+
+
+  addPerformancePlanning(): void{
+    this.keyAreaFormArray = this.performancePlanning.get('keyAreaFormArray') as FormArray;
+    this.keyAreaFormArray.push(this.createPerformancePlanning());
+  }
+
+  removePerformancePlanning(i: number) {
+    this.keyAreaFormArray.removeAt(i);
+  }
+
+ 
 }

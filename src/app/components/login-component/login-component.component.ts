@@ -26,5 +26,9 @@ export class LoginComponent implements OnInit {
     
   ]);
 
+  onClick(){
+
+  }
+
 
 }

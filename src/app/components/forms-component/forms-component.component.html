@@ -1,38 +1,193 @@
 
+
 <mat-horizontal-stepper #stepper>
-    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-        <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-            </mat-form-field>
+    
+    <mat-step [stepControl]="personalInformation" errorMessage="Name is required.">
+        <form [formGroup]="personalInformation">
+            <ng-template matStepLabel>Personal Information</ng-template>
+
+       
+
+            <table class="example-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>First name</mat-label>
+                            <input matInput [readonly]="'True'">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Surname</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Other</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Position</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Department</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </td>
+                
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Appointment Date</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </td>
+            
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Training Institution</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Programme</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Date</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+            </table>
+
+
             <div>
-                <p>Go to a different step to see the error state</p>
-                <button mat-button matStepperNext>Next</button>
+                
+        
+                <button mat-raised-button matStepperNext color="primary">Next</button>
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-        <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Fill out your address</ng-template>
-            <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl" required>
-            </mat-form-field>
-            <div>
-                <p>Go to a different step to see the error state</p>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+
+    <mat-step [stepControl]="performancePlanning" errorMessage="Performance planning is required">
+        <form [formGroup]="performancePlanning" class="container mt-3">
+            <ng-template matStepLabel>Performance Planning</ng-template>
+        
+            <div class="row justify-content-center">
+                <div class="col-6">
+            
+                
+                    <button mat-raised-button type="button" color="primary" class="btn btn-primary mb-2" (click)="addPerformancePlanning() ">Add </button>
+                  
+                    
+            
+                    <section class="container border mb-4 p-3" formArrayName="keyAreaFormArray"
+                        *ngFor="let keyResults of keyResultControl; let i = index;">
+
+                        <div [formGroupName]="i">
+                
+
+                            <table class="example-full-width" cellspacing="0">
+                               
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Key Results Area</mat-label>
+                                            <input matInput type="text" class="form-control" formControlName="keyResultsArea" />
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Targets</mat-label>
+                                            <input matInput type="text" class="form-control" formControlName="targets" />
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Resources</mat-label>
+                                            <input matInput type="text" class="form-control" formControlName="resourcesRequired" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+
+                            </table>   
+
+                            <div class="col-6 text-right" style="float:right;">
+                                <button mat-raised-button type="button" color="warn" class="btn btn-danger btn-sm"
+                                    (click)="removePerformancePlanning(i)">Remove</button>
+
+                                    
+                            </div>
+                            
+                           
+                        </div>
+
+            
+                    </section> 
+            
+            
+            
+            
+                </div>
+            
+            
             </div>
+
+            
+    
+            <br><br>
+            <div style="position: absolute; left: 45%;">
+                
+                
+                    <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
+
+                
+                    <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;" >Next</button>
+                
+
+            </div>
+
         </form>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+
+        <br><br>
+
+        <div style="position: absolute; left: 45%;">
+            
+
+                <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
+            
+
+            
+                <button mat-raised-button color="primary" (click)="stepper.reset()" style="margin-left: 10px;"  >Reset</button>
+            
+           
+
+            
         </div>
     </mat-step>
 </mat-horizontal-stepper>
