@@ -3,6 +3,18 @@ import { FormBuilder,FormControl, FormGroup,FormArray, Validators } from '@angul
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { VirtualTimeScheduler } from 'rxjs';
 
+
+interface Departments {
+  value: string;
+  viewValue: string;
+}
+
+
+interface Position {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-forms-component',
   templateUrl: './forms-component.component.html',
@@ -15,6 +27,9 @@ export class FormsComponent implements OnInit {
   personalInformation: FormGroup;
   public performancePlanning: FormGroup;
   public keyAreaFormArray: FormArray;
+  public trainingRForm: FormGroup;
+  public trainingArray: FormArray;
+  
 
   constructor(private _formBuilder: FormBuilder) { 
     this.performancePlanning = this._formBuilder.group({
@@ -33,12 +48,27 @@ export class FormsComponent implements OnInit {
       firstCtrl: ['', Validators.required]
     });
 
+    this.trainingRForm = this._formBuilder.group({
+      trainingArray: this._formBuilder.array([this.createTraining()])
+    });
 
+    
     
   }
 
-  
 
+  departments: Departments[] = [
+    { value: 'option-1', viewValue: 'Option1' },
+    { value: 'option-2', viewValue: 'Option2' },
+    { value: 'option-3', viewValue: 'Option3' }
+  ];
+
+  position: Position[] = [
+    { value: 'option-1', viewValue: 'Option1' },
+    { value: 'option-2', viewValue: 'Option2' },
+    { value: 'option-3', viewValue: 'Option3' }
+  ];
+  
   get keyResultControl() {
     return this.performancePlanning.get('keyAreaFormArray')['controls'];
   }
@@ -62,5 +92,32 @@ export class FormsComponent implements OnInit {
     this.keyAreaFormArray.removeAt(i);
   }
 
+
+  get keyTrainingtControl() {
+    return this.trainingRForm.get('trainingArray')['controls'];
+  }
+
+
+  createTraining(): FormGroup {
+    return this._formBuilder.group({
+      institution: '',
+      date: '',
+      program: ''
+    });
+  }
+
+
+  addTraining(): void {
+    this.trainingArray = this.trainingRForm.get('trainingArray') as FormArray;
+    this.trainingArray.push(this.createTraining());
+  }
+
+  removeTraining(i: number) {
+    this.trainingArray.removeAt(i);
+  }
+
  
+  
+
+
 }

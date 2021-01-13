@@ -33,60 +33,158 @@
 
                 <tr>
                     <td>
-                        <mat-form-field class="example-full-width">
+                       
+                        <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Position</mat-label>
-                            <input matInput>
+                            <mat-select>
+                                <mat-option *ngFor="let _position of position" [value]="_position.value">
+                                    {{_position.viewValue}}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
+
                     </td>
                     <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Department</mat-label>
-                            <input matInput>
+                            
+                        <mat-form-field appearance="fill" class="example-full-width"> 
+                            <mat-label>Departments</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let _department of departments" [value]="_department.value">
+                                    {{_department.viewValue}}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
+
+                    </td>
+
+
+                    <td>
+                    
+                        <mat-form-field appearance="fill" class="example-full-width" style="margin-top: 0px;">
+                            <mat-label>Appointment Date</mat-label>
+                            <input matInput [matDatepicker]="picker1">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    
+                    
+                    
                     </td>
                 
                 </tr>
 
 
-                <tr>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Appointment Date</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </td>
-            
-                </tr>
+                
+                    
+                
 
-                <tr>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Training Institution</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Programme</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Date</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </td>
-                </tr>
+
 
             </table>
 
 
-            <div>
-                
+
+                 <form [formGroup]="trainingRForm" class="container mt-3">
+            <!-- <ng-template matStepLabel>Performance Planning</ng-template> -->
         
-                <button mat-raised-button matStepperNext color="primary">Next</button>
+            <div class="row justify-content-center">
+                <div class="col-6">
+            
+                
+                   
+                  
+                    
+            
+                    <section class="container border mb-4 p-3" formArrayName="trainingArray"
+                        *ngFor="let trainingResult of keyTrainingtControl let i = index;">
+
+                        <div [formGroupName]="i">
+                
+
+                            <table class="example-full-width" cellspacing="0">
+                               
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Training Institution</mat-label>
+                                            <input matInput type="text" class="form-control" formControlName="institution" />
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+
+                                        
+                                        <mat-form-field appearance="fill" class="example-full-width" style="margin-top: 0px;">
+                                            <mat-label>Date</mat-label>
+                                            <input matInput [matDatepicker]="picker2">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2 ></mat-datepicker>
+                                        </mat-form-field>
+
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Programme</mat-label>
+                                            <input matInput type="text" class="form-control" formControlName="program" />
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+
+                            </table>   
+
+<div>
+
+    <div class="col-6 text-right" style="float:left;">
+        <button mat-raised-button type="button" color="primary" class="btn btn-primary mb-2"
+            (click)="addTraining() ">Add </button>
+    </div>
+
+    <div class="col-6 text-right" style="float:right;">
+        <button mat-raised-button type="button" color="warn" class="btn btn-danger btn-sm"
+            (click)="removeTraining(i)">Remove</button>
+    
+    </div>
+
+</div>
+
+
+                           
+                            
+                           
+                        </div>
+
+            
+                    </section> 
+            
+            
+            
+            
+                </div>
+            
+            
             </div>
+
+            
+    
+            <br><br>
+            <div style="position: absolute; left: 45%;">
+                
+                
+                    <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
+
+                
+                    <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;" >Next</button>
+                
+
+            </div>
+
+        </form>
+
+
+
+
+
+
+         
         </form>
     </mat-step>
 
