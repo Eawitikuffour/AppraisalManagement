@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FormsComponent } from './components/forms-component/forms-component.component';
+import { FormsComponent as YearStartForm } from './components/forms-component/forms-component.component';
+import { LoginComponent } from './components/login-component/login-component.component';
 
 const routes: Routes = [
-  { path: 'forms-component', component: FormsComponent }
+  {path: '' , component: LoginComponent , pathMatch: 'full'},
+  { path: 'forms/start/:hash', component: YearStartForm, pathMatch: 'full' },
+
 ];
 
 @NgModule({

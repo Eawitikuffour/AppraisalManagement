@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder,FormControl, FormGroup,FormArray, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { VirtualTimeScheduler } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 interface Departments {
@@ -18,20 +18,30 @@ interface Position {
 @Component({
   selector: 'app-forms-component',
   templateUrl: './forms-component.component.html',
-  styleUrls: ['./forms-component.component.css'],
-  providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
-  }]
+  styleUrls: ['./forms-component.component.css']
 })
 export class FormsComponent implements OnInit {
-  personalInformation: FormGroup;
-  public performancePlanning: FormGroup;
-  public keyAreaFormArray: FormArray;
-  public trainingRForm: FormGroup;
-  public trainingArray: FormArray;
-  
+  // personalInformation: FormGroup  ;
 
-  constructor(private _formBuilder: FormBuilder) { 
+  personalInformation = new FormGroup({
+    
+  });
+
+   public performancePlanning: FormGroup;
+
+
+
+  public keyAreaFormArray: FormArray;
+
+  public trainingForm: FormGroup;
+
+
+  public trainingArray: FormArray;
+  hash: string; 
+  showForm = false;
+  i: number;
+
+  constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute, private cdref: ChangeDetectorRef) { 
     this.performancePlanning = this._formBuilder.group({
       keyAreaFormArray: this._formBuilder.array([this.createPerformancePlanning()])
 
@@ -43,17 +53,37 @@ export class FormsComponent implements OnInit {
    // this.keyAreaFormArray = this._formBuilder.array([]);
 
     //this.addKeyResearchArea();
+    this.route.params.subscribe(params => {
+      if (params) {
+           this.hash = params.hash;
+           if(params.hash === '12345'){
+             this.showForm = true;
+             this.initializeForm();
+             this.cdref.detectChanges();
+           }
+      }
+    })
+
+    // this.i === 0;
+    
+    
+  }
+
+  initializeForm() {
 
     this.personalInformation = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      firstName: new FormControl(''),
+      surname: new FormControl(''),
+      other: new FormControl(''),
+      position: new FormControl(''),
+      department: new FormControl(''),
+      appointmentDate: new FormControl(''),
     });
 
-    this.trainingRForm = this._formBuilder.group({
+    this.trainingForm = this._formBuilder.group({
       trainingArray: this._formBuilder.array([this.createTraining()])
     });
 
-    
-    
   }
 
 
@@ -90,11 +120,12 @@ export class FormsComponent implements OnInit {
 
   removePerformancePlanning(i: number) {
     this.keyAreaFormArray.removeAt(i);
+    console.log(i)
   }
 
 
   get keyTrainingtControl() {
-    return this.trainingRForm.get('trainingArray')['controls'];
+    return this.trainingForm.get('trainingArray')['controls'];
   }
 
 
@@ -108,16 +139,15 @@ export class FormsComponent implements OnInit {
 
 
   addTraining(): void {
-    this.trainingArray = this.trainingRForm.get('trainingArray') as FormArray;
+    this.trainingArray = this.trainingForm.get('trainingArray') as FormArray;
     this.trainingArray.push(this.createTraining());
   }
 
   removeTraining(i: number) {
+    // console.log(i)
     this.trainingArray.removeAt(i);
   }
 
  
-  
-
 
 }

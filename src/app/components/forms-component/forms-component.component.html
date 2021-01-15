@@ -1,304 +1,438 @@
-<mat-card class="mat-card">
-
-<mat-horizontal-stepper #stepper>
     
-    <mat-step [stepControl]="personalInformation" errorMessage="Name is required.">
-        <form [formGroup]="personalInformation">
-            <ng-template matStepLabel>Personal Information</ng-template>
+    <mat-card class="mat-card" *ngIf="showForm; else wrongHash">
+    
+    <mat-horizontal-stepper #stepper>
+        
+        <mat-step [stepControl]="personalInformation" errorMessage="Name is required.">
+            <form [formGroup]="personalInformation">
+                <ng-template matStepLabel>Personal Information</ng-template>
+    
+           {{hash}}
+    
+                <table class="example-full-width" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>First name</mat-label>
+                                <input matInput [readonly]="'True'" formControlName ="firstName" >
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Surname</mat-label>
+                                <input matInput formControlName="surname">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Other</mat-label>
+                                <input matInput formControlName="other">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+    
+    
+                    <tr>
+                        <td>
+                           
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Position</mat-label>
+                                <mat-select formControlName ="position">
+                                    <mat-option *ngFor="let _position of position" [value]="_position.value">
+                                        {{_position.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+    
+                        </td>
+                        <td>
+                                
+                            <mat-form-field appearance="fill" class="example-full-width"> 
+                                <mat-label >Department</mat-label>
+                                <mat-select formControlName="department">
+                                    <mat-option *ngFor="let _department of departments" [value]="_department.value">
+                                        {{_department.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+    
+                        </td>
+    
+    
+                        <td>
+                        
+                           <mat-form-field appearance="fill" class="example-full-width" style="margin-top: 0px;">
+                                <mat-label>Choose Appointment Date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="appointmentDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        
+                        
+                        </td>
+                    
+                    </tr>
+    
+    
+                    
+                        
+                    
+    
+    
+    
+                </table>
+                <br>
 
-       
-
-            <table class="example-full-width" cellspacing="0">
-                <tr>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>First name</mat-label>
-                            <input matInput [readonly]="'True'">
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Surname</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Other</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td>
+                <h2 style="text-align: center;">TRAINING RECEIVED DURING THE YEAR UNDER REVIEW</h2>
+    
+     
+                <div class="col-6 text-right" style="margin-left: 47%">
+                
+                
+                    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addTraining()">
+                        <mat-icon>add_box</mat-icon>
+                    </button>
+                
+                </div>
+    
+                     <form [formGroup]="trainingForm" class="container mt-3">
+                <!-- <ng-template matStepLabel>Performance Planning</ng-template> -->
+            
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                
+                    
                        
-                        <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Position</mat-label>
-                            <mat-select>
-                                <mat-option *ngFor="let _position of position" [value]="_position.value">
-                                    {{_position.viewValue}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                    </td>
-                    <td>
-                            
-                        <mat-form-field appearance="fill" class="example-full-width"> 
-                            <mat-label>Departments</mat-label>
-                            <mat-select>
-                                <mat-option *ngFor="let _department of departments" [value]="_department.value">
-                                    {{_department.viewValue}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                    </td>
-
-
-                    <td>
-                    
-                        <mat-form-field appearance="fill" class="example-full-width" style="margin-top: 0px;">
-                            <mat-label>Appointment Date</mat-label>
-                            <input matInput [matDatepicker]="picker1">
-                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
-                        </mat-form-field>
-                    
-                    
-                    
-                    </td>
+                      
+                        
                 
-                </tr>
-
-
-                
+                        <section class="container border mb-4 p-3" formArrayName="trainingArray"
+                            *ngFor="let trainingResult of keyTrainingtControl let i = index;">
+    
+                            <div [formGroupName]="i">
                     
-                
-
-
-
-            </table>
-
-
-
-                 <form [formGroup]="trainingRForm" class="container mt-3">
-            <!-- <ng-template matStepLabel>Performance Planning</ng-template> -->
-        
-            <div class="row justify-content-center">
-                <div class="col-6">
-            
-                
-                   
-                  
-                    
-            
-                    <section class="container border mb-4 p-3" formArrayName="trainingArray"
-                        *ngFor="let trainingResult of keyTrainingtControl let i = index;">
-
-                        <div [formGroupName]="i">
-                
-
-                            <table class="example-full-width" cellspacing="0">
-                               
-                                <tr>
-                                    <td>
-                                        <mat-form-field class="example-full-width">
-                                            <mat-label>Training Institution</mat-label>
-                                            <input matInput type="text" class="form-control" formControlName="institution" />
-                                        </mat-form-field>
-                                    </td>
-                                    <td>
-
+    
+                                <table class="example-full-width" cellspacing="0">
+                                   
+                                +   <tr>
+                                        <td>
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Training Institution</mat-label>
+                                                <input matInput type="text" class="form-control" formControlName="institution" />
+                                            </mat-form-field>
+                                        </td>
+                                        <td>
+    
+                                            
                                         
-                                        <mat-form-field appearance="fill" class="example-full-width" style="margin-top: 0px;">
-                                            <mat-label>Date</mat-label>
-                                            <input matInput [matDatepicker]="picker2">
-                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker2 ></mat-datepicker>
-                                        </mat-form-field>
 
-                                    </td>
-                                    <td>
-                                        <mat-form-field class="example-full-width">
-                                            <mat-label>Programme</mat-label>
-                                            <input matInput type="text" class="form-control" formControlName="program" />
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
+                                            <mat-form-field appearance="fill" class="example-full-width" style="margin-top: 0px;">
+                                                <mat-label>Choose a date</mat-label>
+                                                <input matInput [matDatepicker]="picker" formControlName="date">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field>
 
-                            </table>   
-
-<div>
-
-    <div class="col-6 text-right" style="float:left;">
-        <button mat-raised-button type="button" color="primary" class="btn btn-primary mb-2"
-            (click)="addTraining() ">Add </button>
-    </div>
-
-    <div class="col-6 text-right" style="float:right;">
-        <button mat-raised-button type="button" color="warn" class="btn btn-danger btn-sm"
-            (click)="removeTraining(i)">Remove</button>
     
-    </div>
-
-</div>
-
-
-                           
-                            
-                           
-                        </div>
-
-            
-                    </section> 
-            
-            
-            
-            
-                </div>
-            
-            
-            </div>
-
-            
+                                        </td>
+                                        <td>
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Programme</mat-label>
+                                                <input matInput type="text" class="form-control" formControlName="program" />
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
     
-            <br><br>
-            <div style="position: absolute; left: 45%;">
-                
-                
-                    <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
+                                </table>   
+    
+    *ngIf="
+    
+    
+    "
+    
+      
+    
+        <div class="col-6 text-right" style="float:right;">
+            
 
-                
-                    <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;" >Next</button>
-                
-
-            </div>
-
-        </form>
-
-
-
-
-
-
-         
-        </form>
-    </mat-step>
-
-    <mat-step [stepControl]="performancePlanning" errorMessage="Performance planning is required">
-        <form [formGroup]="performancePlanning" class="container mt-3">
-            <ng-template matStepLabel>Performance Planning</ng-template>
+                <button mat-fab  color="warn" aria-label="Example icon button with a delete icon" (click)="removeTraining(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
         
-            <div class="row justify-content-center">
-                <div class="col-6">
-            
-                
-                   
-                  
-                    
-            
-                    <section class="container border mb-4 p-3" formArrayName="keyAreaFormArray"
-                        *ngFor="let keyResults of keyResultControl; let i = index;">
-
-                        <div [formGroupName]="i">
-                
-
-                            <table class="example-full-width" cellspacing="0">
+        </div>           
+                                
                                
-                                <tr>
-                                    <td>
-                                        <mat-form-field class="example-full-width">
-                                            <mat-label>Key Results Area</mat-label>
-                                            <input matInput type="text" class="form-control" formControlName="keyResultsArea" />
-                                        </mat-form-field>
-                                    </td>
-                                    <td>
-                                        <mat-form-field class="example-full-width">
-                                            <mat-label>Targets</mat-label>
-                                            <input matInput type="text" class="form-control" formControlName="targets" />
-                                        </mat-form-field>
-                                    </td>
-                                    <td>
-                                        <mat-form-field class="example-full-width">
-                                            <mat-label>Resources</mat-label>
-                                            <input matInput type="text" class="form-control" formControlName="resourcesRequired" />
-                                        </mat-form-field>
-                                    </td>
-                                </tr>
-
-                            </table>   
-
-<div>
-
-    <div class="col-6 text-right" style="float:left;">
-        <button mat-raised-button type="button" color="primary" class="btn btn-primary mb-2"
-            (click)="addPerformancePlanning() ">Add </button>
-    </div>
-
-    <div class="col-6 text-right" style="float:right;">
-        <button mat-raised-button type="button" color="warn" class="btn btn-danger btn-sm"
-            (click)="removePerformancePlanning(i)">Remove</button>
+                            </div>
     
-    </div>
-
-</div>
-
-
-                           
-                            
-                           
-                        </div>
-
-            
-                    </section> 
-            
-            
-            
-            
+                
+                        </section> 
+                
+                
+                
+                
+                    </div>
+                
+                
                 </div>
-            
-            
+    
+                
+        
+                <br><br>
+                <div style="position: absolute; left: 45%;">
+                    
+                    
+                        <!-- <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
+    
+                    
+                        <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;" >Next</button> -->
+                    
+                        <button mat-fab color="primary" matStepperPrevious aria-label="Example icon button with a delete icon" style="margin-right: 10px;">
+                            <mat-icon>arrow_back_ios</mat-icon>
+                        </button>
+                        
+                        
+                        <button mat-fab color="primary" matStepperNext  aria-label="Example icon button with a delete icon" style="margin-left: 10px;">
+                            <mat-icon>arrow_forward_ios</mat-icon>
+                        </button>
+    
+                </div>
+    
+            </form>
+
+          
+    
+    
+    
+    
+    
+    
+             
+            </form>
+ 
+            <br>
+
+            <div style="margin-top: 60px;">
+                <h2> COMPLETION OF STAFF PERFORMANCE MANAGEMENT FORM</h2> 
+                <p> The Performance Management System is designed to evaluate how well you are doing in your present position in
+                    relation to results achieved within the period of appraisal to enable the organization to achieve its goals and objectives.
+                <p> The Management System is also aimed at assisting you to improve upon your performance and ensure your career development.</p>
+                <p>The Performance Management System is an annual cycle involving four key phases. All members of Staff/Heads of
+                    Divisions, Departments/Units and Appraisers should read the Guidelines below before filling the Form</p>
             </div>
 
             
+        </mat-step>
+    
+
+        
+
+        <mat-step [stepControl]="performancePlanning" errorMessage="Performance planning is required">
+            <p>To be agreed between the appraiser and the employee at the start of the annual appraisal cycle or when a new employee
+            commences.</p>
+            <form [formGroup]="performancePlanning" class="container mt-3">
+                <ng-template matStepLabel>Performance Planning</ng-template>
+            
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                
+                 <section class="container border mb-4 p-3">
+                        
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td >
+                               
+                                <h2>
+                                    <mat-label>Key Results Area</mat-label>
+                                </h2>
+                                   
+                                
+                            </td>
+                        
+                        
+                        
+                            <td>
+                                
+                                
+                                    <h2>
+                                        Targets
+                                    </h2>
+                                     
+                                    
+                                                             
+                            </td>
+                        
+                        
+                        
+                            <td>
+                                
+                                  
+                                    <h2>
+                                        Resources Required
+                                    </h2>
+
+                                
+                           </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                    <p>(Not more than 5 <br>To be drawn from employees Job Description)</p>
+                            </td>
+
+                            <td> 
+                                    <p>(Results to be achieved should be specific, <br>measurable, realistic and time-framed)</p>
+                            </td>
+                        </tr>
+                    </table>  
+                </section>
+                        
+                
+                        <section class="container border mb-4 p-3" formArrayName="keyAreaFormArray"
+                            *ngFor="let keyResults of keyResultControl; let i = index;">
+    
+                            <div [formGroupName]="i">
+                    
+    
+                                <table class="example-full-width" cellspacing="0">
+                                    
+                                   
+                                    <tr>
+                                        <td>
+                                           
+                                            <mat-form-field class="example-full-width">
+                                               
+                                           
+                                                
+                                                <textarea matInput type="text" class="form-control" formControlName="keyResultsArea" > </textarea>
+                                            </mat-form-field>
+                                        </td>
+                                        <td>
+                                            
+                                            <mat-form-field class="example-full-width">
+                                        
+                                                
+                                                <textarea matInput type="text" class="form-control" formControlName="targets"> </textarea>
+                                            </mat-form-field>
+                                        </td>
+                                        <td>
+                                            
+                                            <mat-form-field class="example-full-width">
+                                                
+                                                
+                                                <textarea matInput type="text" class="form-control" formControlName="resourcesRequired"> </textarea>
+                                                
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+    
+                                </table>   
+    
+
+    
+       
+    
+        <div class="col-6 text-right" style="float:right;" > 
+          
+
+                <button mat-fab  color="warn" aria-label="Example icon button with a delete icon"
+                    (click)="removePerformancePlanning(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+        
+                
+        </div>
+    
+    
+    
+    
+                               
+                                
+                               
+                            </div>
+    
+                
+                        </section> 
+                
+                
+                
+                
+                    </div>
+                
+                
+                </div>
+    
+                
+        
+                <br><br>
+                <div style="position: absolute; left: 45%;">
+                    
+                    
+                        <!-- <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button> -->
+
+                        <button mat-fab color="primary" matStepperPrevious aria-label="Example icon button with a delete icon" style="margin-right: 10px;" >
+                            <mat-icon>arrow_back_ios</mat-icon>
+                        </button>
+
+
+                        <button mat-fab color="primary" matStepperNext  aria-label="Example icon button with a delete icon" style="margin-left: 10px;">
+                            <mat-icon>arrow_forward_ios</mat-icon>
+                        </button>
+    
+                    
+                        <!-- <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;" >Next</button> -->
+
+
+                        
+                    
+    
+                </div>
+    
+            </form>
+
+            <div class="col-6 text-right" style="float:left;">
+                
+                    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addPerformancePlanning(i)">
+                        <mat-icon>add_box</mat-icon>
+                    </button>
+            </div>
+
+            
+        </mat-step>
+        <mat-step>
+            
+
+            <ng-template matStepLabel>Done</ng-template>
+           {{ personalInformation.value | json }}
+
+
+           <!-- {{this.performancePlanning.get("surname").value}} -->
+
+           {{ trainingForm.value | json }} 
+           {{performancePlanning.value |json}}
     
             <br><br>
-            <div style="position: absolute; left: 45%;">
+    
+            <div style="position: absolute; left: 45%; margin-bottom: 30px;">
                 
-                
-                    <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
+    
 
+                    <button mat-fab color="primary" matStepperPrevious aria-label="Example icon button with a delete icon"  style="margin-right: 10px;">
+                        <mat-icon>arrow_back_ios</mat-icon>
+                    </button>
                 
-                    <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;" >Next</button>
+    
                 
-
+                    <button mat-raised-button color="primary" (click)="stepper.reset()" style="margin-left: 10px;"  >Reset</button>
+                
+               
+    
+                
             </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+    
+    </mat-card>
 
-        </form>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-
-        <br><br>
-
-        <div style="position: absolute; left: 45%;">
-            
-
-                <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
-            
-
-            
-                <button mat-raised-button color="primary" (click)="stepper.reset()" style="margin-left: 10px;"  >Reset</button>
-            
-           
-
-            
-        </div>
-    </mat-step>
-</mat-horizontal-stepper>
-
-</mat-card>
+<ng-template #wrongHash>
+SORRY PAGE EXPIRED
+</ng-template>

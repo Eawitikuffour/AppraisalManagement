@@ -15,8 +15,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker'; 
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field'; 
-
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field'; 
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -42,14 +43,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatIconModule
   
   ],
   exports:[
     MatButtonModule,
     MatStepperModule
   ],
-  providers: [],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
+  }, 
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', floatLabel : 'auto' }}
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
