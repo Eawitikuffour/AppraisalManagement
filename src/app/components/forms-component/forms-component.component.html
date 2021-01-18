@@ -1,11 +1,12 @@
     
     <mat-card class="mat-card" *ngIf="showForm; else wrongHash">
+        
     
-    <mat-horizontal-stepper #stepper>
+              <mat-horizontal-stepper #stepper>
         
         <mat-step [stepControl]="personalInformation" errorMessage="Name is required.">
-            <form [formGroup]="personalInformation">
-                <ng-template matStepLabel>Personal Information</ng-template>
+              <form [formGroup]="personalInformation">
+                 <ng-template matStepLabel>Personal Information</ng-template>
     
            {{hash}}
     
@@ -14,7 +15,8 @@
                         <td>
                             <mat-form-field class="example-full-width">
                                 <mat-label>First name</mat-label>
-                                <input matInput [readonly]="'True'" formControlName ="firstName" >
+                                <!-- <input matInput [readonly]="'True'" formControlName ="firstName" > -->
+                                <input matInput formControlName="firstName">
                             </mat-form-field>
                         </td>
                         <td>
@@ -83,121 +85,8 @@
                 </table>
                 <br>
 
-                <h2 style="text-align: center;">TRAINING RECEIVED DURING THE YEAR UNDER REVIEW</h2>
+               
     
-     
-                <div class="col-6 text-right" style="margin-left: 47%">
-                
-                
-                    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addTraining()">
-                        <mat-icon>add_box</mat-icon>
-                    </button>
-                
-                </div>
-    
-                     <form [formGroup]="trainingForm" class="container mt-3">
-                <!-- <ng-template matStepLabel>Performance Planning</ng-template> -->
-            
-                <div class="row justify-content-center">
-                    <div class="col-6">
-                
-                    
-                       
-                      
-                        
-                
-                        <section class="container border mb-4 p-3" formArrayName="trainingArray"
-                            *ngFor="let trainingResult of keyTrainingtControl let i = index;">
-    
-                            <div [formGroupName]="i">
-                    
-    
-                                <table class="example-full-width" cellspacing="0">
-                                   
-                                +   <tr>
-                                        <td>
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label>Training Institution</mat-label>
-                                                <input matInput type="text" class="form-control" formControlName="institution" />
-                                            </mat-form-field>
-                                        </td>
-                                        <td>
-    
-                                            
-                                        
-
-                                            <mat-form-field appearance="fill" class="example-full-width" style="margin-top: 0px;">
-                                                <mat-label>Choose a date</mat-label>
-                                                <input matInput [matDatepicker]="picker" formControlName="date">
-                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker></mat-datepicker>
-                                            </mat-form-field>
-
-    
-                                        </td>
-                                        <td>
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label>Programme</mat-label>
-                                                <input matInput type="text" class="form-control" formControlName="program" />
-                                            </mat-form-field>
-                                        </td>
-                                    </tr>
-    
-                                </table>   
-    
-    *ngIf="
-    
-    
-    "
-    
-      
-    
-        <div class="col-6 text-right" style="float:right;">
-            
-
-                <button mat-fab  color="warn" aria-label="Example icon button with a delete icon" (click)="removeTraining(i)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-        
-        </div>           
-                                
-                               
-                            </div>
-    
-                
-                        </section> 
-                
-                
-                
-                
-                    </div>
-                
-                
-                </div>
-    
-                
-        
-                <br><br>
-                <div style="position: absolute; left: 45%;">
-                    
-                    
-                        <!-- <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
-    
-                    
-                        <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;" >Next</button> -->
-                    
-                        <button mat-fab color="primary" matStepperPrevious aria-label="Example icon button with a delete icon" style="margin-right: 10px;">
-                            <mat-icon>arrow_back_ios</mat-icon>
-                        </button>
-                        
-                        
-                        <button mat-fab color="primary" matStepperNext  aria-label="Example icon button with a delete icon" style="margin-left: 10px;">
-                            <mat-icon>arrow_forward_ios</mat-icon>
-                        </button>
-    
-                </div>
-    
-            </form>
 
           
     
@@ -207,11 +96,11 @@
     
     
              
-            </form>
+              </form>
  
-            <br>
+            
 
-            <div style="margin-top: 60px;">
+            <div style="margin-top: 60px; text-align: justify;">
                 <h2> COMPLETION OF STAFF PERFORMANCE MANAGEMENT FORM</h2> 
                 <p> The Performance Management System is designed to evaluate how well you are doing in your present position in
                     relation to results achieved within the period of appraisal to enable the organization to achieve its goals and objectives.
@@ -220,7 +109,25 @@
                     Divisions, Departments/Units and Appraisers should read the Guidelines below before filling the Form</p>
             </div>
 
+            <div style="position: absolute; left: 45%;">
             
+            
+            
+                <!-- <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button>
+                
+                                
+                                    <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;" >Next</button> -->
+            
+                
+            
+                <button mat-fab color="primary" matStepperNext aria-label="Example icon button with a delete icon"
+                    style="margin-left: 10px;">
+                    <mat-icon>arrow_forward_ios</mat-icon>
+                </button>
+            
+            </div>
+
+            <br><br>
         </mat-step>
     
 
@@ -229,6 +136,14 @@
         <mat-step [stepControl]="performancePlanning" errorMessage="Performance planning is required">
             <p>To be agreed between the appraiser and the employee at the start of the annual appraisal cycle or when a new employee
             commences.</p>
+
+            <div class="col-6 text-right" style="margin-left: 47%">
+            
+                <button mat-fab color="primary" aria-label="Example icon button with a delete icon"
+                    (click)="addPerformancePlanning(i)">
+                    <mat-icon>add_box</mat-icon>
+                </button>
+            </div>
             <form [formGroup]="performancePlanning" class="container mt-3">
                 <ng-template matStepLabel>Performance Planning</ng-template>
             
@@ -287,71 +202,81 @@
                 </section>
                         
                 
-                        <section class="container border mb-4 p-3" formArrayName="keyAreaFormArray"
-                            *ngFor="let keyResults of keyResultControl; let i = index;">
-    
-                            <div [formGroupName]="i">
+
+                    <div class="KRA">
+
+
+                          <section class="container border mb-4 p-3" formArrayName="keyAreaFormArray"
+
+                                           *ngFor="let keyResults of keyResultControl; let i = index;">
+
+                
+                               <mat-card class="KRAmat-card">
+
+                                          <div [formGroupName]="i">
                     
     
-                                <table class="example-full-width" cellspacing="0">
+                                                 <table class="example-full-width" cellspacing="0">
                                     
                                    
-                                    <tr>
-                                        <td>
+                                                       <tr>
+                                                             <td>
                                            
-                                            <mat-form-field class="example-full-width">
-                                               
-                                           
-                                                
-                                                <textarea matInput type="text" class="form-control" formControlName="keyResultsArea" > </textarea>
-                                            </mat-form-field>
-                                        </td>
-                                        <td>
+                                                                     <mat-form-field class="example-full-width">
+                                                                                                                                         
+                                                                             <textarea matInput type="text" class="form-control" formControlName="keyResultsArea" placeholder="Key Results Area" > </textarea>
+                                                                     </mat-form-field>
+                                                             </td>
+
+                                                              <td>
                                             
-                                            <mat-form-field class="example-full-width">
+                                                                     <mat-form-field class="example-full-width">
                                         
                                                 
-                                                <textarea matInput type="text" class="form-control" formControlName="targets"> </textarea>
-                                            </mat-form-field>
-                                        </td>
-                                        <td>
+                                                                             <textarea matInput type="text" class="form-control" formControlName="targets" placeholder="Targets"> </textarea>
+                                                                     </mat-form-field>
+                                                              </td>
+
+                                                               <td>
                                             
-                                            <mat-form-field class="example-full-width">
+                                                                     <mat-form-field class="example-full-width">
+                                                    
                                                 
+                                                                             <textarea matInput type="text" class="form-control" formControlName="resourcesRequired" placeholder="Resources Required"> </textarea>
                                                 
-                                                <textarea matInput type="text" class="form-control" formControlName="resourcesRequired"> </textarea>
-                                                
-                                            </mat-form-field>
-                                        </td>
-                                    </tr>
+                                                                     </mat-form-field> 
+                                                               </td>     
+                                                       </tr>
     
-                                </table>   
+                                                 </table>   
     
 
     
        
     
-        <div class="col-6 text-right" style="float:right;" > 
+                                               <div class="col-6 text-right" style="float:right;" > 
           
 
-                <button mat-fab  color="warn" aria-label="Example icon button with a delete icon"
-                    (click)="removePerformancePlanning(i)">
-                    <mat-icon>delete</mat-icon>
-                </button>
+                                                      <button mat-fab  color="warn" aria-label="Example icon button with a delete icon"
+                                                             (click)="removePerformancePlanning(i)">
+                                                             <mat-icon>delete</mat-icon>
+                                                       </button>
         
                 
-        </div>
-    
+                                               </div> <br><br><br>
     
     
     
                                
                                 
                                
-                            </div>
-    
+                                          </div>
+                               </mat-card>
+                 
                 
-                        </section> 
+                          </section> 
+
+                    </div>
                 
                 
                 
@@ -361,15 +286,17 @@
                 
                 </div>
     
+
+               
                 
         
-                <br><br>
+                <br>
                 <div style="position: absolute; left: 45%;">
                     
                     
                         <!-- <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button> -->
 
-                        <button mat-fab color="primary" matStepperPrevious aria-label="Example icon button with a delete icon" style="margin-right: 10px;" >
+                        <button mat-fab color="accent" matStepperPrevious aria-label="Example icon button with a delete icon" style="margin-right: 10px;" >
                             <mat-icon>arrow_back_ios</mat-icon>
                         </button>
 
@@ -386,29 +313,139 @@
                     
     
                 </div>
-    
+                        <br><br>
+
+
             </form>
 
-            <div class="col-6 text-right" style="float:left;">
-                
-                    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addPerformancePlanning(i)">
-                        <mat-icon>add_box</mat-icon>
-                    </button>
-            </div>
+         
 
             
         </mat-step>
         <mat-step>
             
 
-            <ng-template matStepLabel>Done</ng-template>
-           {{ personalInformation.value | json }}
+         
+           <mat-card>
+                            <ng-template matStepLabel>Done</ng-template>
+                            {{ performancePlanning.value | json }}
+                            
+                            
+                            <!-- {{this.performancePlanning.get("surname").value}} -->
+                            
+                            
+                            <!-- {{performancePlanning.value |json}} <br><br> -->
+
+                            <div>
+                                    <mat-label>First Name</mat-label> <br>
+                                    <h2>{{personalInformation.get("firstName").value}}</h2>
+                                    <br> 
+                                   
+                                    <mat-label>Surname</mat-label> <br>
+                                    <h2>{{personalInformation.get("surname").value}}</h2>
+                                    
+                                    <br>
+
+                                    <mat-label>Other</mat-label> <br>
+                                    <h2>{{personalInformation.get("other").value}}</h2>
+                                    
+                                    <br>
 
 
-           <!-- {{this.performancePlanning.get("surname").value}} -->
+                                    <mat-label>Position</mat-label> <br>
+                                    <h2>{{personalInformation.get("position").value}}</h2>
+                                    
+                                    <br>
 
-           {{ trainingForm.value | json }} 
-           {{performancePlanning.value |json}}
+                                    <mat-label>Department</mat-label> <br>
+                                        <h2>{{personalInformation.get("department").value}}</h2>
+                                    
+                                    <br>
+
+                                    <mat-label>Appointment Date</mat-label> <br>
+                                    <h2>{{personalInformation.get("appointmentDate").value | date: 'longDate'}}</h2>
+                                    
+                                    
+
+                            </div>
+
+
+                 <section class="container border mb-4 p-3">
+                
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                
+                                    <mat-label>Key Results Area</mat-label>
+                                
+                
+                
+                            </td>
+                
+                
+                
+                            <td>
+                                                               
+                                   <mat-label>Targets</mat-label>
+                                                
+                             </td>
+                
+                
+                
+                            <td>
+                                                              
+                                    <mat-label>Resources Required</mat-label>
+                            
+                                
+                            </td>
+                        </tr>
+                
+                        
+                    </table>
+
+                </section> 
+
+                             
+
+
+
+                <div class="KRA">
+                
+                
+                 
+                
+                
+                        
+                
+                            
+                
+                
+                                <table class="example-full-width" cellspacing="0" *ngIf="performancePlanning.value.keyAreaFormArray">
+                
+                                    <tr *ngFor="let kra of performancePlanning.value.keyAreaFormArray">
+                                        <mat-card class="KRAmat-card">
+                                              <td style="text-align: left;">{{kra.keyResultsArea}}</td>
+                                              <td style="text-align: center;">{{kra.targets}}</td>
+                                              <td style="text-align: right;">{{kra.resourcesRequired}}</td>
+                                        </mat-card>
+                                    </tr>
+                
+                                </table>
+                
+                                
+                           
+                        
+                
+                
+                
+                </div>
+
+                            
+
+           </mat-card>
+           
+
+        
     
             <br><br>
     
@@ -416,20 +453,25 @@
                 
     
 
-                    <button mat-fab color="primary" matStepperPrevious aria-label="Example icon button with a delete icon"  style="margin-right: 10px;">
+                    <button mat-fab color="accent" matStepperPrevious aria-label="Example icon button with a delete icon"  style="margin-right: 10px;">
                         <mat-icon>arrow_back_ios</mat-icon>
                     </button>
                 
     
                 
-                    <button mat-raised-button color="primary" (click)="stepper.reset()" style="margin-left: 10px;"  >Reset</button>
+                    <button mat-fab color="warn"  (click)="stepper.reset()" style="margin-left: 10px;"  ><mat-icon>restore_page</mat-icon></button>
                 
-               
+                   
+                    <button mat-fab color="primary" matStepperPrevious aria-label="Example icon button with a delete icon"
+                        style="margin-left: 10px" (click)="onClick()" [disabled]="!personalInformation.valid">
+                        <mat-icon>send</mat-icon>
+                    </button>
     
                 
             </div>
+            <br><br>
         </mat-step>
-    </mat-horizontal-stepper>
+              </mat-horizontal-stepper>
     
     </mat-card>
 

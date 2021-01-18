@@ -33,10 +33,6 @@ export class FormsComponent implements OnInit {
 
   public keyAreaFormArray: FormArray;
 
-  public trainingForm: FormGroup;
-
-
-  public trainingArray: FormArray;
   hash: string; 
   showForm = false;
   i: number;
@@ -72,17 +68,15 @@ export class FormsComponent implements OnInit {
   initializeForm() {
 
     this.personalInformation = this._formBuilder.group({
-      firstName: new FormControl(''),
-      surname: new FormControl(''),
+      firstName: new FormControl('',Validators.required),
+      surname: new FormControl('', Validators.required),
       other: new FormControl(''),
       position: new FormControl(''),
       department: new FormControl(''),
-      appointmentDate: new FormControl(''),
+      appointmentDate: new FormControl('', Validators.required),
     });
 
-    this.trainingForm = this._formBuilder.group({
-      trainingArray: this._formBuilder.array([this.createTraining()])
-    });
+   
 
   }
 
@@ -124,30 +118,9 @@ export class FormsComponent implements OnInit {
   }
 
 
-  get keyTrainingtControl() {
-    return this.trainingForm.get('trainingArray')['controls'];
+  onClick(){
+
   }
-
-
-  createTraining(): FormGroup {
-    return this._formBuilder.group({
-      institution: '',
-      date: '',
-      program: ''
-    });
-  }
-
-
-  addTraining(): void {
-    this.trainingArray = this.trainingForm.get('trainingArray') as FormArray;
-    this.trainingArray.push(this.createTraining());
-  }
-
-  removeTraining(i: number) {
-    // console.log(i)
-    this.trainingArray.removeAt(i);
-  }
-
- 
+  
 
 }
