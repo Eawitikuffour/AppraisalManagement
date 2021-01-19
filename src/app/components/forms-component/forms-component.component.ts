@@ -72,7 +72,7 @@ export class FormsComponent implements OnInit {
       surname: new FormControl('', Validators.required),
       other: new FormControl(''),
       position: new FormControl(''),
-      department: new FormControl(''),
+      department: new FormControl('', Validators.required),
       appointmentDate: new FormControl('', Validators.required),
     });
 
@@ -100,9 +100,9 @@ export class FormsComponent implements OnInit {
 
   createPerformancePlanning(): FormGroup{
     return this._formBuilder.group({
-      keyResultsArea: '',
-      targets: '',
-      resourcesRequired: ''
+      keyResultsArea: new FormControl('',Validators.required),
+      targets: new FormControl('', Validators.required),
+      resourcesRequired: new FormControl('',Validators.required),
     });
   }
 
@@ -120,6 +120,8 @@ export class FormsComponent implements OnInit {
 
   onClick(){
 
+    console.log(this.personalInformation.value);
+    console.log(this.performancePlanning.value);
   }
   
 

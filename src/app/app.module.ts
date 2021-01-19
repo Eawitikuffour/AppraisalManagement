@@ -13,11 +13,12 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card'; 
 import { MatDatepickerModule } from '@angular/material/datepicker'; 
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field'; 
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import {MatIconModule} from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip'; 
 
 
 
@@ -44,7 +45,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatNativeDateModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   
   ],
   exports:[
@@ -54,6 +56,7 @@ import {MatIconModule} from '@angular/material/icon';
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
   }, 
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', floatLabel : 'auto' }}
 ],
   bootstrap: [AppComponent]

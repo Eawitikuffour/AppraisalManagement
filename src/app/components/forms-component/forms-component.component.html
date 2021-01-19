@@ -2,13 +2,15 @@
     <mat-card class="mat-card" *ngIf="showForm; else wrongHash">
         
     
-              <mat-horizontal-stepper #stepper>
-        
-        <mat-step [stepControl]="personalInformation" errorMessage="Name is required.">
+              <mat-horizontal-stepper #stepper [linear]="true">
+            <!-- <mat-horizontal-stepper #stepper> -->
+
+        <mat-step [stepControl]="personalInformation" errorMessage="Personal information required.">
               <form [formGroup]="personalInformation">
+
                  <ng-template matStepLabel>Personal Information</ng-template>
     
-           {{hash}}
+                   {{hash}}
     
                 <table class="example-full-width" cellspacing="0">
                     <tr>
@@ -121,7 +123,7 @@
                 
             
                 <button mat-fab color="primary" matStepperNext aria-label="Example icon button with a delete icon"
-                    style="margin-left: 10px;">
+                    style="margin-left: 10px;" [disabled]="!personalInformation.valid" matTooltip="next">
                     <mat-icon>arrow_forward_ios</mat-icon>
                 </button>
             
@@ -133,14 +135,14 @@
 
         
 
-        <mat-step [stepControl]="performancePlanning" errorMessage="Performance planning is required">
+        <mat-step [stepControl]="performancePlanning" errorMessage="Performance planning is required" >
             <p>To be agreed between the appraiser and the employee at the start of the annual appraisal cycle or when a new employee
             commences.</p>
 
             <div class="col-6 text-right" style="margin-left: 47%">
             
                 <button mat-fab color="primary" aria-label="Example icon button with a delete icon"
-                    (click)="addPerformancePlanning(i)">
+                    (click)="addPerformancePlanning(i)" matTooltip="add new KRA" >
                     <mat-icon>add_box</mat-icon>
                 </button>
             </div>
@@ -258,7 +260,7 @@
           
 
                                                       <button mat-fab  color="warn" aria-label="Example icon button with a delete icon"
-                                                             (click)="removePerformancePlanning(i)">
+                                                             (click)="removePerformancePlanning(i)" *ngIf= "i>0">
                                                              <mat-icon>delete</mat-icon>
                                                        </button>
         
@@ -296,12 +298,13 @@
                     
                         <!-- <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 10px;" >Back</button> -->
 
-                        <button mat-fab color="accent" matStepperPrevious aria-label="Example icon button with a delete icon" style="margin-right: 10px;" >
+                        <button mat-fab color="accent" matStepperPrevious aria-label="Example icon button with a delete icon" style="margin-right: 10px;" matTooltip="back">
                             <mat-icon>arrow_back_ios</mat-icon>
                         </button>
 
 
-                        <button mat-fab color="primary" matStepperNext  aria-label="Example icon button with a delete icon" style="margin-left: 10px;">
+                        <button mat-fab color="primary" matStepperNext  aria-label="Example icon button with a delete icon" 
+                        style="margin-left: 10px;" [disabled]="!performancePlanning.valid" matTooltip="next">
                             <mat-icon>arrow_forward_ios</mat-icon>
                         </button>
     
@@ -326,90 +329,67 @@
             
 
          
-           <mat-card>
+           <div class="review"> 
+
+                 
+                  <mat-card class="KRAmat-card"> 
                             <ng-template matStepLabel>Done</ng-template>
-                            {{ performancePlanning.value | json }}
-                            
-                            
-                            <!-- {{this.performancePlanning.get("surname").value}} -->
-                            
-                            
-                            <!-- {{performancePlanning.value |json}} <br><br> -->
+                                                        
+                                                     
+                            <div style="margin-left: 150px;">
 
-                            <div>
-                                    <mat-label>First Name</mat-label> <br>
-                                    <h2>{{personalInformation.get("firstName").value}}</h2>
-                                    <br> 
-                                   
-                                    <mat-label>Surname</mat-label> <br>
-                                    <h2>{{personalInformation.get("surname").value}}</h2>
-                                    
-                                    <br>
+                                    <table class="example-full-width" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <mat-label>First Name: </mat-label>
+                                                <h2>{{personalInformation.get("firstName").value}}</h2>
+                                            </td>
+                                            <td>
+                                                <mat-label>Surname</mat-label> <br>
+                                                <h2>{{personalInformation.get("surname").value}}</h2>
+                                            </td>
+                                            <td>
+                                                <mat-label>Other</mat-label> <br>
+                                                <h2>{{personalInformation.get("other").value}}</h2>
+                                            </td>
+                                        </tr>
 
-                                    <mat-label>Other</mat-label> <br>
-                                    <h2>{{personalInformation.get("other").value}}</h2>
-                                    
-                                    <br>
+                                        <tr>
+                                            <td>
+                                                <mat-label>Position</mat-label> <br>
+                                                <h2>{{personalInformation.get("position").value}}</h2>
+                                            </td>
+                                            <td>
+                                                <mat-label>Department</mat-label> <br>
+                                                <h2>{{personalInformation.get("department").value}}</h2>
+                                            </td>
+                                            <td>
+                                                <mat-label>Appointment Date</mat-label> <br>
+                                                <h2>{{personalInformation.get("appointmentDate").value | date: 'longDate'}}</h2>
+                                            </td>
+                                        </tr>
 
-
-                                    <mat-label>Position</mat-label> <br>
-                                    <h2>{{personalInformation.get("position").value}}</h2>
-                                    
-                                    <br>
-
-                                    <mat-label>Department</mat-label> <br>
-                                        <h2>{{personalInformation.get("department").value}}</h2>
-                                    
-                                    <br>
-
-                                    <mat-label>Appointment Date</mat-label> <br>
-                                    <h2>{{personalInformation.get("appointmentDate").value | date: 'longDate'}}</h2>
+                                         
+                                    </table>
                                     
                                     
 
                             </div>
 
+ 
+                                 <br>
 
-                 <section class="container border mb-4 p-3">
-                
-                    <table class="example-full-width" cellspacing="0">
-                        <tr>
-                            <td>
-                
-                                    <mat-label>Key Results Area</mat-label>
-                                
-                
-                
-                            </td>
-                
-                
-                
-                            <td>
-                                                               
-                                   <mat-label>Targets</mat-label>
-                                                
-                             </td>
-                
-                
-                
-                            <td>
-                                                              
-                                    <mat-label>Resources Required</mat-label>
-                            
-                                
-                            </td>
-                        </tr>
-                
-                        
-                    </table>
-
-                </section> 
-
-                             
+                <div class="pp">
+                       <ul style="list-style-type: none; margin: 10px;">
+                           <li>Key Results Area</li>
+                           <li>Targets</li>
+                           <li>Resources Required</li>
+                       </ul>
+                </div>             
 
 
 
-                <div class="KRA">
+                     <div class="reviewKRA" style="margin-left: 10px;">
                 
                 
                  
@@ -420,13 +400,16 @@
                             
                 
                 
-                                <table class="example-full-width" cellspacing="0" *ngIf="performancePlanning.value.keyAreaFormArray">
+                                <table class="example-full-width" cellspacing="0" *ngIf="performancePlanning.value.keyAreaFormArray" style=" border-spacing: 5px; ">
                 
-                                    <tr *ngFor="let kra of performancePlanning.value.keyAreaFormArray">
+                                    <tr *ngFor="let kra of performancePlanning.value.keyAreaFormArray" style="margin: 50px;">
                                         <mat-card class="KRAmat-card">
-                                              <td style="text-align: left;">{{kra.keyResultsArea}}</td>
-                                              <td style="text-align: center;">{{kra.targets}}</td>
-                                              <td style="text-align: right;">{{kra.resourcesRequired}}</td>
+                                            <td class="form-td" style="font-weight: bold;">{{kra.keyResultsArea}}</td>
+                                            <td class="form-td" style="font-weight: bold;">{{kra.targets}}</td>
+                                            <td class="form-td" style="font-weight: bold;">{{kra.resourcesRequired}}</td>
+                                              <!-- <div style=" max-width: 310px; margin-top: 1px;  "> <td>{{kra.keyResultsArea}}</td> </div>
+                                              <div style=" max-width: 310px; margin-top: 1px;  "> <td>{{kra.targets}}</td> </div>
+                                              <div style=" max-width: 310px; margin-top: 1px;  "> <td>{{kra.resourcesRequired}}</td> </div> -->
                                         </mat-card>
                                     </tr>
                 
@@ -435,14 +418,14 @@
                                 
                            
                         
+                      
                 
                 
-                
-                </div>
+                      </div>
 
-                            
+                  </mat-card>                            
 
-           </mat-card>
+            </div>
            
 
         
@@ -453,17 +436,17 @@
                 
     
 
-                    <button mat-fab color="accent" matStepperPrevious aria-label="Example icon button with a delete icon"  style="margin-right: 10px;">
+                    <button mat-fab color="accent" matStepperPrevious aria-label="Example icon button with a delete icon"  style="margin-right: 10px;" matTooltip="back">
                         <mat-icon>arrow_back_ios</mat-icon>
                     </button>
                 
     
                 
-                    <button mat-fab color="warn"  (click)="stepper.reset()" style="margin-left: 10px;"  ><mat-icon>restore_page</mat-icon></button>
+                    <button mat-fab color="warn"  (click)="stepper.reset()" style="margin-left: 10px;" matTooltip="restore page" ><mat-icon>restore_page</mat-icon></button>
                 
                    
                     <button mat-fab color="primary" matStepperPrevious aria-label="Example icon button with a delete icon"
-                        style="margin-left: 10px" (click)="onClick()" [disabled]="!personalInformation.valid">
+                        style="margin-left: 10px" (click)="onClick()" [disabled]="!(personalInformation.valid && performancePlanning.valid)" matTooltip="submit">
                         <mat-icon>send</mat-icon>
                     </button>
     
@@ -476,5 +459,10 @@
     </mat-card>
 
 <ng-template #wrongHash>
-SORRY PAGE EXPIRED
+
+
+      <mat-card class="mat-card">
+          <H2 style="color: red; text-align: center;">SORRY PAGE EXPIRED OR URL IS INCORRECT</H2>
+
+      </mat-card>
 </ng-template>

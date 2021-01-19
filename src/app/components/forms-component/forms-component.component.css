@@ -34,5 +34,25 @@ td {
 
 .KRA{
   max-height: 500px;
-  overflow-y: auto;
+  overflow: auto;
+} 
+
+.reviewKRA{
+  max-height: 400px;
+  overflow: auto;
+} 
+
+.pp ul li{
+ display: inline;
+ margin: 100px;
 }
+
+.form-td {
+  width: 310px; 
+  margin-top: 1px;
+  height: 80px; 
+  padding: 2px; 
+  margin-left: 5px;
+   
+}
+
