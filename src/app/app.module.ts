@@ -18,7 +18,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field'; 
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import {MatIconModule} from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip'; 
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DashboardComponent } from './components/dashboard/dashboard.component'; 
 
 
 
@@ -29,7 +30,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   declarations: [
     AppComponent,
     LoginComponent,
-    FormsComponent
+    FormsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -53,9 +55,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatStepperModule
   ],
-  providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
-  }, 
+  providers: [
+    {provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }}, 
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', floatLabel : 'auto' }}
 ],

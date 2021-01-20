@@ -21,7 +21,7 @@ interface Position {
   styleUrls: ['./forms-component.component.css']
 })
 export class FormsComponent implements OnInit {
-  // personalInformation: FormGroup  ;
+  
 
   personalInformation = new FormGroup({
     
@@ -38,6 +38,7 @@ export class FormsComponent implements OnInit {
   i: number;
 
   constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute, private cdref: ChangeDetectorRef) { 
+    
     this.performancePlanning = this._formBuilder.group({
       keyAreaFormArray: this._formBuilder.array([this.createPerformancePlanning()])
 
@@ -46,9 +47,7 @@ export class FormsComponent implements OnInit {
 
   ngOnInit() {
 
-   // this.keyAreaFormArray = this._formBuilder.array([]);
-
-    //this.addKeyResearchArea();
+   
     this.route.params.subscribe(params => {
       if (params) {
            this.hash = params.hash;
@@ -60,7 +59,6 @@ export class FormsComponent implements OnInit {
       }
     })
 
-    // this.i === 0;
     
     
   }
