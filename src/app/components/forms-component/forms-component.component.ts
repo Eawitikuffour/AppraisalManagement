@@ -51,7 +51,7 @@ export class FormsComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params) {
            this.hash = params.hash;
-           if(params.hash === '12345'){
+        if (params.hash === '12345'){
              this.showForm = true;
              this.initializeForm();
              this.cdref.detectChanges();
