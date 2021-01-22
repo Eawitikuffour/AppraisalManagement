@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
     
   ]);
 
-  onClick(){
+    login(){
+      console.log(this.emailFormControl.value + this.passwordFormControl.value);
 
   }
 

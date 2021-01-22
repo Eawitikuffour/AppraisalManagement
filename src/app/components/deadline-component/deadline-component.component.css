@@ -1,0 +1,28 @@
+.mat-card {
+  height: 50%;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 10%;
+}
+
+.startDate{
+    
+    width: 30%;
+    height: 15%;
+    float: left;
+    margin-left: 190px;
+   
+   
+
+}
+
+.endDate{
+       
+         
+         width: 30%;
+        height: 15%;
+         float: left;
+         margin-left: 30px;
+         
+
+}

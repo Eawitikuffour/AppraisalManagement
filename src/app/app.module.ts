@@ -19,7 +19,8 @@ import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/mat
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import {MatIconModule} from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { DashboardComponent } from './components/dashboard/dashboard.component'; 
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DeadlineComponentComponent } from './components/deadline-component/deadline-component.component'; 
 
 
 
@@ -31,7 +32,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AppComponent,
     LoginComponent,
     FormsComponent,
-    DashboardComponent
+    DashboardComponent,
+    DeadlineComponentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,41 @@
+<mat-card class="mat-card">
+
+    
+
+       
+
+            <div style="margin-top: 50px;">
+                   
+                <div class="startDate">
+                
+                    <mat-form-field>
+                        <mat-label>Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker1" [min]="today" >
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                
+                </div>
+                
+                
+                
+                
+                
+                <div class="endDate">
+                    <mat-form-field>
+                        <mat-label>End Date</mat-label>
+                        <input matInput [matDatepicker]="picker2" [min]="today"> 
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+    
+
+
+    <button mat-fab color="primary" (click)="onClick()" style="margin-left: 10px;" matTooltip="set" style="margin-top: 270px; margin-left: 450px;" >
+        <mat-icon>send</mat-icon>
+    </button>
+</mat-card>
